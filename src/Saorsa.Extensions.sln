@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5B993B37-8379-490E-A6B8-BA31E666A166}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saorsa.Extensions", "Saorsa.Extensions\Saorsa.Extensions.csproj", "{ADF6283E-527C-4E6F-BCD4-3632FAF1D30F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saorsa.Extensions.Tests", "..\tests\Saorsa.Extensions.Tests\Saorsa.Extensions.Tests.csproj", "{EBAA1F50-33BB-4253-A5B4-7604BBCFAE6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADF6283E-527C-4E6F-BCD4-3632FAF1D30F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADF6283E-527C-4E6F-BCD4-3632FAF1D30F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADF6283E-527C-4E6F-BCD4-3632FAF1D30F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADF6283E-527C-4E6F-BCD4-3632FAF1D30F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBAA1F50-33BB-4253-A5B4-7604BBCFAE6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBAA1F50-33BB-4253-A5B4-7604BBCFAE6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBAA1F50-33BB-4253-A5B4-7604BBCFAE6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBAA1F50-33BB-4253-A5B4-7604BBCFAE6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EBAA1F50-33BB-4253-A5B4-7604BBCFAE6A} = {5B993B37-8379-490E-A6B8-BA31E666A166}
+	EndGlobalSection
+EndGlobal
