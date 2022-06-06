@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Saorsa.Extensions.Tests;
 
-public class ClaimsPrincipalExtensionsTests
+public class ClaimsUtilityExtensionsTests
 {
     [Test]
     public void TestClaimsFilterByType()
@@ -25,11 +25,8 @@ public class ClaimsPrincipalExtensionsTests
                     new Claim(GetRandomString(), GetRandomString()));
         }
 
-        var claimsPrincipal = new ClaimsPrincipal(
-            new ClaimsIdentity(claims));
-
-        var matches = claimsPrincipal
-            .FilterClaims(filterClaimType)
+        var matches = claims
+            .Filter(filterClaimType)
             .ToList();
         
         Assert.IsNotEmpty(matches);
@@ -41,8 +38,9 @@ public class ClaimsPrincipalExtensionsTests
     [Test]
     public void TestClaimsFilterByTypeNoMatches()
     {
-        var claimsPrincipal = new ClaimsPrincipal();
-        var matches = claimsPrincipal.FilterClaims(
+        // ReSharper disable once CollectionNeverUpdated.Local
+        var claims = new List<Claim>();
+        var matches = claims.Filter(
             "non-existent-claim-type");
         Assert.IsEmpty(matches);
     }
@@ -66,11 +64,8 @@ public class ClaimsPrincipalExtensionsTests
                     new Claim(GetRandomString(), GetRandomString()));
         }
 
-        var claimsPrincipal = new ClaimsPrincipal(
-            new ClaimsIdentity(claims));
-
-        var matches = claimsPrincipal
-            .FilterClaims(filterClaimType, filterClaimValue)
+        var matches = claims
+            .Filter(filterClaimType, filterClaimValue)
             .ToList();
         
         Assert.IsNotEmpty(matches);
@@ -82,8 +77,9 @@ public class ClaimsPrincipalExtensionsTests
     [Test]
     public void TestClaimsFilterByTypeAndValueNoMatches()
     {
-        var claimsPrincipal = new ClaimsPrincipal();
-        var matches = claimsPrincipal.FilterClaims(
+        // ReSharper disable once CollectionNeverUpdated.Local
+        var claims = new List<Claim>();
+        var matches = claims.Filter(
             "non-existent-claim-type",
             "non-existent-claim-value");
         Assert.IsEmpty(matches);
@@ -105,10 +101,8 @@ public class ClaimsPrincipalExtensionsTests
                     new Claim(GetRandomString(), GetRandomString()));
         }
         
-        var claimsPrincipal = new ClaimsPrincipal(
-            new ClaimsIdentity(claims));
-        var match = claimsPrincipal
-            .FirstClaimOrDefault(filterClaimType);
+        var match = claims
+            .FirstOrDefault(filterClaimType);
 
         Assert.IsNotNull(match);
         Assert.AreEqual(
@@ -119,8 +113,9 @@ public class ClaimsPrincipalExtensionsTests
     [Test]
     public void TestFirstClaimOrDefaultByTypeNoMatch()
     {
-        var claimsPrincipal = new ClaimsPrincipal();
-        var match = claimsPrincipal.FirstClaimOrDefault(
+        // ReSharper disable once CollectionNeverUpdated.Local
+        var claims = new List<Claim>();
+        var match = claims.FirstOrDefault(
             "non-existent-claim-type");
         Assert.IsNull(match);
     }
@@ -142,10 +137,8 @@ public class ClaimsPrincipalExtensionsTests
                     new Claim(GetRandomString(), GetRandomString()));
         }
         
-        var claimsPrincipal = new ClaimsPrincipal(
-            new ClaimsIdentity(claims));
-        var match = claimsPrincipal
-            .FirstClaimOrDefault(filterClaimType, filterClaimValue);
+        var match = claims
+            .FirstOrDefault(filterClaimType, filterClaimValue);
 
         Assert.IsNotNull(match);
         Assert.AreEqual(
@@ -159,14 +152,15 @@ public class ClaimsPrincipalExtensionsTests
     [Test]
     public void TestFirstClaimOrDefaultByTypeAndValueNoMatch()
     {
-        var claimsPrincipal = new ClaimsPrincipal();
-        var match = claimsPrincipal.FirstClaimOrDefault(
+        // ReSharper disable once CollectionNeverUpdated.Local
+        var claims = new List<Claim>();
+        var match = claims.FirstOrDefault(
             "non-existent-claim-type",
             "non-existent-claim-value");
         Assert.IsNull(match);
     }
     
-    private string GetRandomString()
+    private static string GetRandomString()
     {
         return Guid.NewGuid().ToString("N");
     }
