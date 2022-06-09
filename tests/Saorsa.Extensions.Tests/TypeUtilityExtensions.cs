@@ -23,6 +23,7 @@ public class TypeUtilityExtensions
     private static readonly Type[] StructureTypes =
     {
         typeof(DateTime),
+        typeof(DateOnly),
         typeof(DateTimeOffset),
         typeof(TimeSpan),
         typeof(TimeOnly),
