@@ -33,4 +33,68 @@ public static class StingUtilityExtensions
     {
         return WebUtility.HtmlDecode(source);
     }
+
+    public static string ToCamelCase(this string source)
+    {
+        var kebab = source.ToKebabCase();
+        var split = kebab.Split('_', StringSplitOptions.RemoveEmptyEntries);
+        var chunks = split.Select((chunk, idx) =>
+        {
+            if (idx == 0)
+            {
+                if(chunk.Length > 1)
+                {
+                    return char.ToLowerInvariant(chunk[0]) + chunk[1..];
+                }
+                return chunk;
+            }
+            if(chunk.Length > 1)
+            {
+                return char.ToUpperInvariant(chunk[0]) + chunk[1..];
+            }
+            return chunk;
+        });
+        return string.Join(string.Empty, chunks);
+    }
+
+    public static string ToPascalCase(this string source)
+    {
+        var kebab = source.ToKebabCase();
+        var split = kebab.Split('_', StringSplitOptions.RemoveEmptyEntries);
+        var chunks = split.Select((chunk) =>
+        {
+            if(chunk.Length > 1)
+            {
+                return char.ToUpperInvariant(chunk[0]) + chunk[1..];
+            }
+            return chunk.ToUpperInvariant();
+        });
+        return string.Join(string.Empty, chunks);
+    }
+    
+    public static string ToKebabCase(this string source)
+    {
+        if (string.IsNullOrEmpty(source))
+        {
+            return source;   
+        }
+
+        source = source.Trim();
+
+        var trimmed = source.TrimStart('_');
+        var trimmedCount = source.Length - trimmed.Length;
+
+        var result = Regex.Replace(
+                trimmed,
+                "(?<!^)(_?[A-Z][a-z]|(?<=_?[a-z])[A-Z0-9])",
+                //"_$1",
+                m => m.Value.StartsWith('_') ? m.Value : $"_{m.Value}",
+                RegexOptions.Compiled)
+            .Trim()
+            .ToLower();
+        
+        return trimmedCount == 0
+            ? result
+            : $"{new string('_', trimmedCount)}{result}";
+    }
 }
