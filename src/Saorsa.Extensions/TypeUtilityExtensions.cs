@@ -9,6 +9,11 @@ public static class TypeUtilityExtensions
         return Nullable.GetUnderlyingType(type) != null;
     }
     
+    public static Type GetUnderlyingTypeIfNullable(this Type type)
+    {
+        return Nullable.GetUnderlyingType(type) ?? type;
+    }
+    
     public static bool IsStruct(this Type type)
     {
         return type.IsValueType && !type.IsEnum && !type.IsPrimitive;

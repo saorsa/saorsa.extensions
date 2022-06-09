@@ -153,4 +153,31 @@ public class TypeUtilityExtensions
                $"Type '{t}' is expected as nullable."); 
         });
     }
+    
+    
+    [Test]
+    public void TestGetUnderlyingTypeIfNullable()
+    {
+        NullableTypes.ToList().ForEach(t =>
+        {
+            var expectedUnderlyingType = Nullable.GetUnderlyingType(t);
+            var underlyingType = t.GetUnderlyingTypeIfNullable();
+
+            Assert.AreEqual(expectedUnderlyingType, underlyingType);
+        });
+
+
+        SimpleTypes
+            .Concat(StructureTypes)
+            .Concat(GenericEnumerationTypes)
+            .Concat(NonGenericEnumerationTypes)
+            .Concat(SingleElementEnumerationTypes)
+            .Concat(NonSingleElementEnumerationTypes)
+            .ToList()
+            .ForEach(t =>
+            {
+                var underlyingType = t.GetUnderlyingTypeIfNullable();
+                Assert.AreEqual(t, underlyingType);
+            });
+    }
 }
