@@ -14,7 +14,7 @@ public static class TypeUtilityExtensions
         return type.IsGenericType && typeof(IEnumerable).IsAssignableFrom(type);
     }
     
-    public static bool IsSingleElementEnumeration(this Type type)
+    public static bool IsSingleElementTypeEnumeration(this Type type)
     {
         return
             // Arrays

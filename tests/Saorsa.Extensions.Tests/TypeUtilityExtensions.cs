@@ -123,14 +123,14 @@ public class TypeUtilityExtensions
     {
         SingleElementEnumerationTypes.ToList().ForEach(t =>
         {
-            Assert.True(t.IsSingleElementEnumeration(),
-                $"Type '{t}' is expected to be single element enumeration.");
+            Assert.True(t.IsSingleElementTypeEnumeration(),
+                $"Type '{t}' is expected to be single element type enumeration.");
         });
         
         NonSingleElementEnumerationTypes.ToList().ForEach(t =>
         {
-            Assert.False(t.IsSingleElementEnumeration(),
-                $"Type '{t}' is NOT a single element enumeration.");
+            Assert.False(t.IsSingleElementTypeEnumeration(),
+                $"Type '{t}' is NOT a single element type enumeration.");
         });
     }
 }
