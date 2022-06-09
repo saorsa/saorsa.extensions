@@ -6,6 +6,14 @@ namespace Saorsa.Extensions.Tests;
 
 public class TypeUtilityExtensions
 {
+    private static readonly Type[] NullableTypes =
+    {
+        typeof(int?),
+        typeof(byte?),
+        typeof(DateTime?),
+        typeof(TimeOnly?),
+    };
+    
     private static readonly Type[] SimpleTypes =
     {
         typeof(short),
@@ -133,6 +141,16 @@ public class TypeUtilityExtensions
         {
             Assert.False(t.IsSingleElementTypeEnumeration(),
                 $"Type '{t}' is NOT a single element type enumeration.");
+        });
+    }
+
+    [Test]
+    public void TestIsNullable()
+    {
+        NullableTypes.ToList().ForEach(t =>
+        {
+           Assert.True(t.IsNullable(),
+               $"Type '{t}' is expected as nullable."); 
         });
     }
 }

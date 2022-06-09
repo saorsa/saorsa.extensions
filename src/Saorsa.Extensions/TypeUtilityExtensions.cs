@@ -4,6 +4,11 @@ namespace Saorsa;
 
 public static class TypeUtilityExtensions
 {
+    public static bool IsNullable(this Type type)
+    {
+        return Nullable.GetUnderlyingType(type) != null;
+    }
+    
     public static bool IsStruct(this Type type)
     {
         return type.IsValueType && !type.IsEnum && !type.IsPrimitive;
