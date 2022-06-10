@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 
 namespace Saorsa;
 
@@ -34,5 +35,17 @@ public static class TypeUtilityExtensions
             // Generics
             || type.IsGenericEnumeration()
             && type.GenericTypeArguments.Length == 1;
+    }
+
+    public static Type? GetSingleElementEnumerationType(this Type type)
+    {
+        if (type.IsSingleElementTypeEnumeration())
+        {
+            return type.IsArray
+                ? type.GetElementType()
+                : type.GenericTypeArguments.FirstOrDefault();
+        }
+
+        return null;
     }
 }

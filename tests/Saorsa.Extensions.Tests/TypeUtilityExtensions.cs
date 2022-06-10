@@ -135,12 +135,18 @@ public class TypeUtilityExtensions
         {
             Assert.True(t.IsSingleElementTypeEnumeration(),
                 $"Type '{t}' is expected to be single element type enumeration.");
+
+            var elementType = t.GetSingleElementEnumerationType();
+            Assert.NotNull(elementType);
         });
         
         NonSingleElementEnumerationTypes.ToList().ForEach(t =>
         {
             Assert.False(t.IsSingleElementTypeEnumeration(),
                 $"Type '{t}' is NOT a single element type enumeration.");
+            
+            var elementType = t.GetSingleElementEnumerationType();
+            Assert.Null(elementType);
         });
     }
 
