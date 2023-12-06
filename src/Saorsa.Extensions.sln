@@ -6,6 +6,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saorsa.Extensions", "Saorsa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saorsa.Extensions.Tests", "..\tests\Saorsa.Extensions.Tests\Saorsa.Extensions.Tests.csproj", "{EBAA1F50-33BB-4253-A5B4-7604BBCFAE6A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{55FA2EB1-55C5-4466-B112-B2292AE39AAE}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.sh = ..\build.sh
+		..\CHANGES.md = ..\CHANGES.md
+		..\LICENSE = ..\LICENSE
+		..\pack.sh = ..\pack.sh
+		..\README.md = ..\README.md
+		..\assets\saorsa-64x64.png = ..\assets\saorsa-64x64.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

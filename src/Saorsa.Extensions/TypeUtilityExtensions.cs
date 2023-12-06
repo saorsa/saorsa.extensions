@@ -1,30 +1,58 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
 
 namespace Saorsa;
 
+
+/// <summary>
+/// Extension methods for Type class.
+/// </summary>
 public static class TypeUtilityExtensions
 {
+    /// <summary>
+    /// Checks if a target type is a Nullable derivative.
+    /// </summary>
+    /// <param name="type">The source type object, required.</param>
     public static bool IsNullable(this Type type)
     {
         return Nullable.GetUnderlyingType(type) != null;
     }
-    
+
+    /// <summary>
+    /// Gets the underlying type of a nullable type, if Nullable, the type itself otherwise.
+    /// </summary>
+    /// <param name="type">The source type object, required.</param>
     public static Type GetUnderlyingTypeIfNullable(this Type type)
     {
         return Nullable.GetUnderlyingType(type) ?? type;
     }
-    
+
+    /// <summary>
+    /// Checks if a target type is a struct or not.
+    /// </summary>
+    /// <param name="type">The source type object, required.</param>
     public static bool IsStruct(this Type type)
     {
-        return type.IsValueType && !type.IsEnum && !type.IsPrimitive;
+        return type is
+        {
+            IsValueType: true,
+            IsEnum: false,
+            IsPrimitive: false
+        };
     }
-    
+
+    /// <summary>
+    /// Checks if a type represents a generic enumeration.
+    /// </summary>
+    /// <param name="type">The source type object, required.</param>
     public static bool IsGenericEnumeration(this Type type)
     {
         return type.IsGenericType && typeof(IEnumerable).IsAssignableFrom(type);
     }
-    
+
+    /// <summary>
+    /// Checks  the type is a single element type enumeration.
+    /// </summary>
+    /// <param name="type">The source type object, required.</param>
     public static bool IsSingleElementTypeEnumeration(this Type type)
     {
         return
@@ -37,6 +65,10 @@ public static class TypeUtilityExtensions
             && type.GenericTypeArguments.Length == 1;
     }
 
+    /// <summary>
+    /// Gets the type of the elements in enumeration type, if this is a single element enumeration, Null otherwise.
+    /// </summary>
+    /// <param name="type">The source type object, required.</param>
     public static Type? GetSingleElementEnumerationType(this Type type)
     {
         if (type.IsSingleElementTypeEnumeration())

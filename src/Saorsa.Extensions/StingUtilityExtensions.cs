@@ -3,37 +3,71 @@ using System.Text.RegularExpressions;
 
 namespace Saorsa;
 
+
+/// <summary>
+/// Extension methods for strings.
+/// </summary>
 public static class StingUtilityExtensions
 {
+    /// <summary>
+    /// Regex pattern ultimate for emails.
+    /// </summary>
     const string EmailPattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
 
+    /// <summary>
+    /// Regex for emails.
+    /// </summary>
     static readonly Regex EmailRegex = new (EmailPattern, RegexOptions.IgnoreCase);
-    
-    public static bool IsValidEmail(this string email)
+
+    /// <summary>
+    /// Checks if a source string matches a valid email pattern.
+    /// </summary>
+    /// <param name="candidate">The string to be checked. Required.</param>
+    public static bool IsValidEmail(this string candidate)
     {
-        return EmailRegex.IsMatch(email);
+        return EmailRegex.IsMatch(candidate);
     }
 
+    /// <summary>
+    /// Encodes string for URL usage.
+    /// </summary>
+    /// <param name="source">The source string. Required.</param>
     public static string UrlEncodedString(this string source)
     {
         return WebUtility.UrlEncode(source);
     }
-    
+
+    /// <summary>
+    /// Decodes an URL string.
+    /// </summary>
+    /// <param name="source">The source string. Required.</param>
     public static string UrlDecodedString(this string source)
     {
         return WebUtility.UrlDecode(source);
     }
-    
+
+    /// <summary>
+    /// Encodes string for HTML usage.
+    /// </summary>
+    /// <param name="source">The source string. Required.</param>
     public static string HtmlEncodedString(this string source)
     {
         return WebUtility.HtmlEncode(source);
     }
-    
+
+    /// <summary>
+    /// Decodes an HTML string.
+    /// </summary>
+    /// <param name="source">The source string. Required.</param>
     public static string HtmlDecodedString(this string source)
     {
         return WebUtility.HtmlDecode(source);
     }
 
+    /// <summary>
+    /// Converts a string to a camelCase equivalent.
+    /// </summary>
+    /// <param name="source">The source string. Required.</param>
     public static string ToCamelCase(this string source)
     {
         var kebab = source.ToKebabCase();
@@ -57,6 +91,10 @@ public static class StingUtilityExtensions
         return string.Join(string.Empty, chunks);
     }
 
+    /// <summary>
+    /// Converts a string to a PascalCase equivalent.
+    /// </summary>
+    /// <param name="source">The source string. Required.</param>
     public static string ToPascalCase(this string source)
     {
         var kebab = source.ToKebabCase();
@@ -71,7 +109,11 @@ public static class StingUtilityExtensions
         });
         return string.Join(string.Empty, chunks);
     }
-    
+
+    /// <summary>
+    /// Converts a string to a kebab_case equivalent.
+    /// </summary>
+    /// <param name="source">The source string. Required.</param>  
     public static string ToKebabCase(this string source)
     {
         if (string.IsNullOrEmpty(source))
