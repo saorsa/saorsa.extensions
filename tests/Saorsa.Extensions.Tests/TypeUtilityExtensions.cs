@@ -127,7 +127,29 @@ public class TypeUtilityExtensions
                 $"Type '{t}' is NOT a generic enumeration.");
         });
     }
-    
+
+    [Test]
+    public void TestIsGenericEnumerationWithType()
+    {
+        var array = new[]
+        {
+            Guid.NewGuid().ToString("D"),
+            Guid.NewGuid().ToString("D"),
+            Guid.NewGuid().ToString("D"),
+            Guid.NewGuid().ToString("D"),
+            Guid.NewGuid().ToString("D"),
+            Guid.NewGuid().ToString("D"),
+            Guid.NewGuid().ToString("D"),
+        };
+        var listFromArray = new List<string>(array);
+        var t = listFromArray.GetType();
+        
+        Assert.True(t.IsGenericEnumeration<string>(), $"Type '{t}' is expected to be generic string enumeration.");
+        Assert.True(t.IsGenericEnumeration<object>(), $"Type '{t}' is expected to be generic object enumeration.");
+        Assert.False(t.IsGenericEnumeration<int>(), $"Type '{t}' is expected NOT to be generic int enumeration.");
+        Assert.False(t.IsGenericEnumeration<float>(), $"Type '{t}' is expected NOT to be generic float enumeration.");
+    }
+
     [Test]
     public void TestEnumerationTypes()
     {

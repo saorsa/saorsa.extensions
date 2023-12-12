@@ -4,8 +4,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <RootNamespace>Saorsa</RootNamespace>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
-        <FileVersion>1.0.0</FileVersion>
+        <AssemblyVersion>1.0.1</AssemblyVersion>
+        <FileVersion>1.0.1</FileVersion>
         <Title>Saorsa.Extensions</Title>
         <Authors>Saorsa Ltd.</Authors>
         <Description>The core library with utility extension methods used in the Saorsa universe.</Description>
@@ -15,6 +15,7 @@
         <RepositoryType>git</RepositoryType>
         <PackageTags>saorsa extensions utility</PackageTags>
         <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+        <Version>1.0.1</Version>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

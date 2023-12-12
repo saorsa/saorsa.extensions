@@ -50,6 +50,19 @@ public static class TypeUtilityExtensions
     }
 
     /// <summary>
+    /// Checks if a type represents a generic enumeration.
+    /// </summary>
+    /// <param name="type">The source type object, required.</param>
+    /// <typeparam name="T">The type of objects in the enumeration to be validated.</typeparam>
+    public static bool IsGenericEnumeration<T>(this Type type)
+    {
+        var genericTypeArgs = type.GetGenericArguments();
+        return typeof(IEnumerable).IsAssignableFrom(type)
+               && genericTypeArgs.Length == 1
+               && typeof(T).IsAssignableFrom(genericTypeArgs[0]);
+    }
+
+    /// <summary>
     /// Checks  the type is a single element type enumeration.
     /// </summary>
     /// <param name="type">The source type object, required.</param>
